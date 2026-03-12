@@ -8,6 +8,17 @@ import (
 	"gofr.dev/pkg/gofr/cmd/terminal"
 )
 
+// @title Swa App
+// @version 1.0
+// @description This is a sample server.
+// @termOfService https://swagger.io/terms/
+// @schemes http https
+// @contact.name API Support
+// @contact.url https://www.swagger.io/support
+// @contact.email support@swagger.io
+// @license.name Apache 2.0
+// @license.url https://www.apache.org/licenses/LICENSE-2.0.html
+// @basePath /
 func main() {
 	// Create a new command-line application
 	app := gofr.NewCMD()
@@ -33,6 +44,13 @@ func main() {
 	app.Run()
 }
 
+// spinner spinner
+// @Summary spinner
+// @Description spinner
+// @Tags Sample-Cmd
+// @Success 200 {object} string
+// @Failure 500 {object} error
+// @Router /spinner [GET]
 func spinner(ctx *gofr.Context) (any, error) {
 	// initialize the spinner
 	sp := terminal.NewDotSpinner(ctx.Out)
@@ -49,6 +67,13 @@ func spinner(ctx *gofr.Context) (any, error) {
 	return "Process Complete", nil
 }
 
+// progress progress
+// @Summary progress
+// @Description progress
+// @Tags Sample-Cmd
+// @Success 200 {object} string
+// @Failure 500 {object} error
+// @Router /progress [GET]
 func progress(ctx *gofr.Context) (any, error) {
 	p, err := terminal.NewProgressBar(ctx.Out, 100)
 	if err != nil {

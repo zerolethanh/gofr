@@ -22,6 +22,15 @@ type HelloGoFrServer struct {
 	health *healthServer
 }
 
+// SayHello say-hello
+// @Summary say-hello
+// @Description say-hello
+// @Tags Server
+// @Accept json
+// @Param HelloRequest body HelloRequest false "HelloRequest data"
+// @Success 200 {object} server.HelloResponse
+// @Failure 500 {object} error
+// @Router /say-hello [GET]
 func (s *HelloGoFrServer) SayHello(ctx *gofr.Context) (any, error) {
 	request := HelloRequest{}
 

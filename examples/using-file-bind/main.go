@@ -10,6 +10,17 @@ import (
 	"gofr.dev/pkg/gofr/file"
 )
 
+// @title Swa App
+// @version 1.0
+// @description This is a sample server.
+// @termOfService https://swagger.io/terms/
+// @schemes http https
+// @contact.name API Support
+// @contact.url https://www.swagger.io/support
+// @contact.email support@swagger.io
+// @license.name Apache 2.0
+// @license.url https://www.apache.org/licenses/LICENSE-2.0.html
+// @basePath /
 func main() {
 	app := gofr.New()
 
@@ -33,6 +44,16 @@ type Data struct {
 	FileHeader *multipart.FileHeader `file:"file_upload"`
 }
 
+// UploadHandler upload-handler
+// @Summary upload-handler
+// @Description upload-handler
+// @Tags Using-File-Bind
+// @Accept application/x-www-form-urlencoded,multipart/form-data
+// @Param Data formData Data false "Data is the struct that we are trying to bind files to"
+// @Success 200 {object} boolean
+// @Success 200 {object} string
+// @Failure 500 {object} error
+// @Router /upload [POST]
 func UploadHandler(c *gofr.Context) (any, error) {
 	var d Data
 

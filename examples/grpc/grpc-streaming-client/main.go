@@ -10,6 +10,17 @@ import (
 	"gofr.dev/pkg/gofr"
 )
 
+// @title Swa App
+// @version 1.0
+// @description This is a sample server.
+// @termOfService https://swagger.io/terms/
+// @schemes http https
+// @contact.name API Support
+// @contact.url https://www.swagger.io/support
+// @contact.email support@swagger.io
+// @license.name Apache 2.0
+// @license.url https://www.apache.org/licenses/LICENSE-2.0.html
+// @basePath /
 func main() {
 	app := gofr.New()
 
@@ -43,6 +54,12 @@ type StreamResponse struct {
 }
 
 // ServerStreamHandler handles server-side streaming with detailed response tracking
+// @Summary server-stream-handler
+// @Description server-stream-handler
+// @Tags Grpc-Streaming-Client
+// @Success 200 {object} map[string]any
+// @Failure 500 {object} error
+// @Router /chat/server-stream [GET]
 func (c *ChatHandler) ServerStreamHandler(ctx *gofr.Context) (any, error) {
 	startTime := time.Now()
 	var responses []StreamResponse
@@ -90,6 +107,13 @@ func (c *ChatHandler) ServerStreamHandler(ctx *gofr.Context) (any, error) {
 }
 
 // ClientStreamHandler handles client-side streaming with detailed tracking
+// @Summary client-stream-handler
+// @Description client-stream-handler
+// @Tags Grpc-Streaming-Client
+// @Param requests body client.Request false "body client.Request data"
+// @Success 200 {object} map[string]any
+// @Failure 500 {object} error
+// @Router /chat/client-stream [POST]
 func (c *ChatHandler) ClientStreamHandler(ctx *gofr.Context) (any, error) {
 	startTime := time.Now()
 	var streamLog []StreamResponse
@@ -144,6 +168,12 @@ func (c *ChatHandler) ClientStreamHandler(ctx *gofr.Context) (any, error) {
 }
 
 // BiDiStreamHandler handles bidirectional streaming with detailed tracking
+// @Summary bi-di-stream-handler
+// @Description bi-di-stream-handler
+// @Tags Grpc-Streaming-Client
+// @Success 200 {object} map[string]any
+// @Failure 500 {object} error
+// @Router /chat/bidi-stream [GET]
 func (c *ChatHandler) BiDiStreamHandler(ctx *gofr.Context) (any, error) {
 	startTime := time.Now()
 	streamLog := make([]StreamResponse, 0)

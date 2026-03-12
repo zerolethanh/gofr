@@ -8,6 +8,17 @@ import (
 
 const redisExpiryTime = 5
 
+// @title Swa App
+// @version 1.0
+// @description This is a sample server.
+// @termOfService https://swagger.io/terms/
+// @schemes http https
+// @contact.name API Support
+// @contact.url https://www.swagger.io/support
+// @contact.email support@swagger.io
+// @license.name Apache 2.0
+// @license.url https://www.apache.org/licenses/LICENSE-2.0.html
+// @basePath /
 func main() {
 	// Create a new application
 	app := gofr.New()
@@ -43,6 +54,13 @@ func main() {
 }
 
 // RedisSetHandler sets a key-value pair in Redis using the Set Command.
+// @Summary redis-set-handler
+// @Description redis-set-handler
+// @Tags Http-Server-Using-Redis
+// @Param input body map[string]string false "body map[string]string data"
+// @Success 200 {object} string
+// @Failure 500 {object} error
+// @Router /redis [POST]
 func RedisSetHandler(c *gofr.Context) (any, error) {
 	input := make(map[string]string)
 
@@ -61,6 +79,13 @@ func RedisSetHandler(c *gofr.Context) (any, error) {
 }
 
 // RedisGetHandler gets the value from Redis.
+// @Summary redis-get-handler
+// @Description redis-get-handler
+// @Tags Http-Server-Using-Redis
+// @Param key path string true "key"
+// @Success 200 {object} map[string]string
+// @Failure 500 {object} error
+// @Router /redis/{key} [GET]
 func RedisGetHandler(c *gofr.Context) (any, error) {
 	key := c.PathParam("key")
 
@@ -76,6 +101,12 @@ func RedisGetHandler(c *gofr.Context) (any, error) {
 }
 
 // RedisPipelineHandler demonstrates using multiple Redis commands efficiently within a pipeline.
+// @Summary redis-pipeline-handler
+// @Description redis-pipeline-handler
+// @Tags Http-Server-Using-Redis
+// @Success 200 {object} []v9.Cmder
+// @Failure 500 {object} error
+// @Router /redis-pipeline [GET]
 func RedisPipelineHandler(c *gofr.Context) (any, error) {
 	pipe := c.Redis.Pipeline()
 

@@ -5,6 +5,17 @@ import (
 	"gofr.dev/pkg/gofr"
 )
 
+// @title Swa App
+// @version 1.0
+// @description This is a sample server.
+// @termOfService https://swagger.io/terms/
+// @schemes http https
+// @contact.name API Support
+// @contact.url https://www.swagger.io/support
+// @contact.email support@swagger.io
+// @license.name Apache 2.0
+// @license.url https://www.apache.org/licenses/LICENSE-2.0.html
+// @basePath /
 func main() {
 	app := gofr.New()
 
@@ -32,6 +43,14 @@ func NewGreetHandler(helloClient client.HelloGoFrClient) *GreetHandler {
 	}
 }
 
+// Hello hello
+// @Summary hello
+// @Description hello
+// @Tags Grpc-Unary-Client
+// @Param name query string true "name"
+// @Success 200 {object} client.HelloResponse
+// @Failure 500 {object} error
+// @Router /hello [GET]
 func (g GreetHandler) Hello(ctx *gofr.Context) (any, error) {
 	userName := ctx.Param("name")
 

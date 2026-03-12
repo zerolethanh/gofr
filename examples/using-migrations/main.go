@@ -13,6 +13,17 @@ const (
 	queryInsertEmployee = "INSERT INTO employee (id, name, gender, contact_number,dob) values (?, ?, ?, ?, ?)"
 )
 
+// @title Swa App
+// @version 1.0
+// @description This is a sample server.
+// @termOfService https://swagger.io/terms/
+// @schemes http https
+// @contact.name API Support
+// @contact.url https://www.swagger.io/support
+// @contact.email support@swagger.io
+// @license.name Apache 2.0
+// @license.url https://www.apache.org/licenses/LICENSE-2.0.html
+// @basePath /
 func main() {
 	// Create a new application
 	a := gofr.New()
@@ -37,6 +48,13 @@ type Employee struct {
 }
 
 // GetHandler handles GET requests for retrieving employee information
+// @Summary get-handler
+// @Description get-handler
+// @Tags Using-Migrations
+// @Param name query string true "name"
+// @Success 200 {object} using-migrations.Employee
+// @Failure 500 {object} error
+// @Router /employee [GET]
 func GetHandler(c *gofr.Context) (any, error) {
 	name := c.Param("name")
 	if name == "" {
@@ -55,6 +73,14 @@ func GetHandler(c *gofr.Context) (any, error) {
 }
 
 // PostHandler handles POST requests for creating new employees
+// @Summary post-handler
+// @Description post-handler
+// @Tags Using-Migrations
+// @Accept json
+// @Param Employee body Employee false "Employee data"
+// @Success 200 {object} string
+// @Failure 500 {object} error
+// @Router /employee [POST]
 func PostHandler(c *gofr.Context) (any, error) {
 	var emp Employee
 	if err := c.Bind(&emp); err != nil {

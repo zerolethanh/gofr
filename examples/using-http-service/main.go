@@ -9,6 +9,17 @@ import (
 	"gofr.dev/pkg/gofr/service"
 )
 
+// @title Swa App
+// @version 1.0
+// @description This is a sample server.
+// @termOfService https://swagger.io/terms/
+// @schemes http https
+// @contact.name API Support
+// @contact.url https://www.swagger.io/support
+// @contact.email support@swagger.io
+// @license.name Apache 2.0
+// @license.url https://www.apache.org/licenses/LICENSE-2.0.html
+// @basePath /
 func main() {
 	a := gofr.New()
 
@@ -51,6 +62,13 @@ func main() {
 	a.Run()
 }
 
+// Handler handler
+// @Summary handler
+// @Description handler
+// @Tags Using-Http-Service
+// @Success 200 {object} struct{FactstringjsonfactLengthintjsonlength}
+// @Failure 500 {object} error
+// @Router /fact [GET]
 func Handler(c *gofr.Context) (any, error) {
 	var data = struct {
 		Fact   string `json:"fact"`

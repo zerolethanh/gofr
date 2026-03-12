@@ -14,6 +14,17 @@ import (
 	"gofr.dev/pkg/gofr/datasource"
 )
 
+// @title Swa App
+// @version 1.0
+// @description This is a sample server.
+// @termOfService https://swagger.io/terms/
+// @schemes http https
+// @contact.name API Support
+// @contact.url https://www.swagger.io/support
+// @contact.email support@swagger.io
+// @license.name Apache 2.0
+// @license.url https://www.apache.org/licenses/LICENSE-2.0.html
+// @basePath /
 func main() {
 	// Create a new application
 	a := gofr.New()
@@ -32,6 +43,13 @@ func main() {
 	a.Run()
 }
 
+// HelloHandler hello-handler
+// @Summary hello-handler
+// @Description hello-handler
+// @Tags Http-Server
+// @Param name query string true "name"
+// @Success 200 {object} string
+// @Router /hello [GET]
 func HelloHandler(c *gofr.Context) (any, error) {
 	name := c.Param("name")
 	if name == "" {
@@ -42,10 +60,23 @@ func HelloHandler(c *gofr.Context) (any, error) {
 	return fmt.Sprintf("Hello %s!", name), nil
 }
 
+// ErrorHandler error-handler
+// @Summary error-handler
+// @Description error-handler
+// @Tags Http-Server
+// @Failure 500 {object} error
+// @Router /error [GET]
 func ErrorHandler(c *gofr.Context) (any, error) {
 	return nil, errors.New("some error occurred")
 }
 
+// RedisHandler redis-handler
+// @Summary redis-handler
+// @Description redis-handler
+// @Tags Http-Server
+// @Success 200 {object} string
+// @Failure 500 {object} datasource.ErrorDB
+// @Router /redis [GET]
 func RedisHandler(c *gofr.Context) (any, error) {
 	val, err := c.Redis.Get(c, "test").Result()
 	if err != nil && err != redis.Nil { // If key is not found, we are not considering this an error and returning "".
@@ -55,6 +86,13 @@ func RedisHandler(c *gofr.Context) (any, error) {
 	return val, nil
 }
 
+// TraceHandler trace-handler
+// @Summary trace-handler
+// @Description trace-handler
+// @Tags Http-Server
+// @Success 200 {object} object
+// @Failure 500 {object} error
+// @Router /trace [GET]
 func TraceHandler(c *gofr.Context) (any, error) {
 	defer c.Trace("traceHandler").End()
 
@@ -100,6 +138,13 @@ func TraceHandler(c *gofr.Context) (any, error) {
 	return data.Data, nil
 }
 
+// MysqlHandler mysql-handler
+// @Summary mysql-handler
+// @Description mysql-handler
+// @Tags Http-Server
+// @Success 200 {object} integer
+// @Failure 500 {object} datasource.ErrorDB
+// @Router /mysql [GET]
 func MysqlHandler(c *gofr.Context) (any, error) {
 	var value int
 	err := c.SQL.QueryRowContext(c, "select 2+2").Scan(&value)

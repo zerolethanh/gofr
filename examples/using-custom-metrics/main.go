@@ -15,6 +15,17 @@ const (
 	productStock          = "product_stock"
 )
 
+// @title Swa App
+// @version 1.0
+// @description This is a sample server.
+// @termOfService https://swagger.io/terms/
+// @schemes http https
+// @contact.name API Support
+// @contact.url https://www.swagger.io/support
+// @contact.email support@swagger.io
+// @license.name Apache 2.0
+// @license.url https://www.apache.org/licenses/LICENSE-2.0.html
+// @basePath /
 func main() {
 	// Create a new application
 	a := gofr.New()
@@ -33,6 +44,12 @@ func main() {
 	a.Run()
 }
 
+// TransactionHandler transaction-handler
+// @Summary transaction-handler
+// @Description transaction-handler
+// @Tags Using-Custom-Metrics
+// @Success 200 {object} string
+// @Router /transaction [POST]
 func TransactionHandler(c *gofr.Context) (any, error) {
 	transactionStartTime := time.Now()
 
@@ -49,6 +66,12 @@ func TransactionHandler(c *gofr.Context) (any, error) {
 	return "Transaction Successful", nil
 }
 
+// ReturnHandler return-handler
+// @Summary return-handler
+// @Description return-handler
+// @Tags Using-Custom-Metrics
+// @Success 200 {object} string
+// @Router /return [POST]
 func ReturnHandler(c *gofr.Context) (any, error) {
 	// logic to create a sales return
 	c.Metrics().DeltaUpDownCounter(c, totalCreditDaySales, -1000, "sale_type", "credit_return")
